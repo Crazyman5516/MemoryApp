@@ -1,14 +1,17 @@
+// .env dosyasındaki değişkenleri process.env'e yükler
+require("dotenv").config();
+
 const config = {
   db: {
-    host: "localhost",
-    user: "root",
-    password: "Sananelan5516.",
-    database: "blogapp",
+    host: process.env.DB_HOST || "localhost",
+    user: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE || "blogapp",
   },
   email: {
-    username: "acartunahan55@gmail.com",
-    password: "fnox ynls xakn nozu ",
-    from: "acartunahan55@gmail.com",
+    username: process.env.EMAIL_USERNAME,
+    password: process.env.EMAIL_PASSWORD,
+    from: process.env.EMAIL_FROM || process.env.EMAIL_USERNAME,
   },
 };
 

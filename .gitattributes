@@ -1,0 +1,14 @@
+# Tüm dosyalar için varsayılan davranışı ayarla.
+# Git'in metin dosyalarını otomatik olarak algılamasını ve satır sonlarını yönetmesini sağla.
+* text=auto
+
+# Metin dosyalarını açıkça belirt ve her zaman LF ile saklanmasını sağla.
+*.js      text eol=lf
+*.json    text eol=lf
+*.ejs     text eol=lf
+*.css     text eol=lf
+*.md      text eol=lf
+
+# Resim gibi binary dosyaların değiştirilmediğinden emin ol.
+*.jpeg    binary
+*.png     binary
