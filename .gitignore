@@ -1,0 +1,6 @@
+# Bağımlılıklar
+node_modules/
+
+# Log dosyaları
+*.log
+npm-debug.log*

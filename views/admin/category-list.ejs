@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../partials/head") %>
+  </head>
+  <body>
+    <%- include("../partials/nav") %>
+
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col-md-12 mt-3">
+          <% if (action != undefined && action == "edit" && categoryid ) { %>
+          <div class="alert alert-success">
+            <%= categoryid %> Numaralı Kategori Güncellendi
+          </div>
+          <% } %> <% if (action != undefined && action == "create") { %>
+          <div class="alert alert-success">Kategori Oluşturuldu</div>
+          <% } %> <% if (action != undefined && action == "delete") { %>
+          <div class="alert alert-warning">Kategori Silindi</div>
+          <% } %>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width: 50px">id</th>
+                <th>name</th>
+                <th style="width: 100px">id</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% categories.forEach(element => { %>
+              <tr>
+                <td>#<%= element.dataValues.id %></td>
+                <td><%= element.dataValues.name %></td>
+                <td style="display: flex; justify-content: center; gap: 5px">
+                  <a
+                    class="btn btn-sm btn-secondary"
+                    href="/admin/categories/<%= element.id %>"
+                    >edit</a
+                  >
+                  <a
+                    class="btn btn-sm btn-danger"
+                    href="/admin/category/delete/<%= element.id %>"
+                    >delete</a
+                  >
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

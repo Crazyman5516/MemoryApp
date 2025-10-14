@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../partials/head") %>
+  </head>
+  <body>
+    <%- include("../partials/nav") %>
+
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col-md-12 mt-3">
+          <% if (action != undefined && action == "edit" && blogid ) { %>
+          <div class="alert alert-success">
+            <%= blogid %> Numaralı Blog Güncellendi
+          </div>
+          <% } %> <% if (action != undefined && action == "create") { %>
+          <div class="alert alert-success">Blog Oluşturuldu</div>
+          <% } %> <% if (action != undefined && action == "delete") { %>
+          <div class="alert alert-warning">Blog Silindi</div>
+          <% } %>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width: 50px">id</th>
+                <th style="width: 150px">Resim</th>
+                <th>Başlık</th>
+                <th>Kategori</th>
+                <th style="width: 130px">id</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% blogs.forEach(element => { %>
+              <tr>
+                <td>#<%= element.dataValues.id %></td>
+                <td>
+                  <img
+                    class="img-fluid"
+                    src="/static/images/<%= element.dataValues.resim %>"
+                    alt=""
+                  />
+                </td>
+                <td><%= element.dataValues.baslik %></td>
+                <td class="">
+                  <% element.categories.forEach(category => { %>
+                  <p><%= category.name %> <% }) %></p>
+                </td>
+                <td>
+                  <a
+                    class="btn btn-sm btn-secondary"
+                    href="/admin/blogs/<%= element.dataValues.id %>"
+                    >edit</a
+                  >
+                  <a
+                    class="btn btn-sm btn-danger"
+                    href="/admin/blog/delete/<%= element.dataValues.id %>"
+                    >delete</a
+                  >
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <%- include("../partials/footer") %>
+  </body>
+</html>

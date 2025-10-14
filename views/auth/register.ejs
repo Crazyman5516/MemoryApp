@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kayıt Ol</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Çiçekli ve Tatlı Tema (Login ile uyumlu) */
+      body {
+        background-color: #fff0f5; /* Lavanta pembesi */
+        background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/watercolor.png");
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 20px 0;
+      }
+      .register-container {
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        max-width: 1000px;
+      }
+      .register-left {
+        background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        color: white;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .register-right h3 {
+        color: #ff8a80; /* Canlı mercan rengi */
+      }
+      .register-right {
+        padding: 40px;
+      }
+      .form-control:focus {
+        border-color: #ff9a9e;
+        box-shadow: 0 0 0 0.25rem rgba(255, 154, 158, 0.3);
+      }
+      .btn-register {
+        background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        border: none;
+        padding: 10px 0;
+        font-weight: 600;
+      }
+      .btn-register:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 154, 158, 0.4);
+      }
+      .social-btn {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .social-btn:hover {
+        background-color: #f8f9fa;
+      }
+      .divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 20px 0;
+      }
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid #ddd;
+      }
+      .divider span {
+        padding: 0 10px;
+        color: #6c757d;
+        font-size: 14px;
+      }
+      .feature-list {
+        list-style: none;
+        padding: 0;
+      }
+      .feature-list li {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+      }
+      .feature-list i {
+        background-color: rgba(255, 255, 255, 0.2);
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+      }
+      .password-toggle {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #6c757d;
+      }
+      .input-group {
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container register-container">
+      <div class="row g-0">
+        <!-- Sol Panel - Hoş Geldiniz Mesajı -->
+        <div class="col-md-6 register-left">
+          <h2 class="mb-4">Hesap Oluşturun</h2>
+          <p class="mb-4">
+            Hesabınızı oluşturun ve harika özelliklerden yararlanmaya başlayın!
+          </p>
+
+          <ul class="feature-list">
+            <li><i class="fas fa-check"></i> Kişiselleştirilmiş deneyim</li>
+            <li><i class="fas fa-check"></i> Güvenli ve şifrelenmiş veri</li>
+            <li><i class="fas fa-check"></i> 7/24 müşteri desteği</li>
+            <li><i class="fas fa-check"></i> Özel içeriklere erişim</li>
+          </ul>
+
+          <div class="mt-5">
+            <p>Zaten hesabınız var mı?</p>
+            <a href="login" class="btn btn-outline-light">Giriş Yapın</a>
+          </div>
+        </div>
+
+        <!-- Sağ Panel - Kayıt Formu -->
+        <div class="col-md-6 register-right">
+          <h3 class="text-center mb-4">Kayıt Formu</h3>
+
+          <form method="post">
+            <% if (typeof message !== "undefined") { %>
+            <div class="alert alert-<%= message.class %>">
+              <%- message.text %>
+            </div>
+            <% } %>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <!-- Ad Soyad Satırı -->
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="name" class="form-label">Ad</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  name="name"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- E-posta -->
+            <div class="mb-3">
+              <label for="email" class="form-label">E-posta</label>
+              <div class="input-group">
+                <span class="input-group-text"
+                  ><i class="fas fa-envelope"></i
+                ></span>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Şifre -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Şifre</label>
+              <div class="input-group">
+                <span class="input-group-text"
+                  ><i class="fas fa-lock"></i
+                ></span>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                />
+                <span class="password-toggle">
+                  <i class="fas fa-eye"></i>
+                </span>
+              </div>
+            </div>
+
+            <!-- Şifre Tekrar -->
+            <div class="mb-3">
+              <label for="repeatPassword" class="form-label"
+                >Şifre Tekrar</label
+              >
+              <div class="input-group">
+                <span class="input-group-text"
+                  ><i class="fas fa-lock"></i
+                ></span>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="repeatPassword"
+                  name="repeatPassword"
+                />
+                <span class="password-toggle">
+                  <i class="fas fa-eye"></i>
+                </span>
+              </div>
+              <!-- Hata Mesajı Alanı -->
+              <div id="passwordError" class="text-danger mt-2 d-none"></div>
+            </div>
+
+            <!-- Kullanım Koşulları -->
+            <div class="mb-3 form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="kosullar"
+                required
+              />
+              <label class="form-check-label" for="kosullar">
+                <a href="#" class="text-decoration-none"
+                  >Kullanım koşullarını</a
+                >
+                ve
+                <a href="#" class="text-decoration-none"
+                  >gizlilik politikasını</a
+                >
+                okudum ve kabul ediyorum
+              </label>
+            </div>
+
+            <!-- Kayıt Butonu -->
+            <div class="d-grid mb-4">
+              <button type="submit" class="btn btn-register btn-lg text-white">
+                <i class="fas fa-user-plus me-2"></i>Hesap Oluştur
+              </button>
+            </div>
+
+            <!-- Sosyal Medya ile Giriş -->
+            <div class="divider">
+              <span>VEYA</span>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4 mb-2">
+                <div class="social-btn text-primary">
+                  <i class="fab fa-facebook-f"></i>
+                </div>
+              </div>
+              <div class="col-md-4 mb-2">
+                <div class="social-btn text-danger">
+                  <i class="fab fa-google"></i>
+                </div>
+              </div>
+              <div class="col-md-4 mb-2">
+                <div class="social-btn text-info">
+                  <i class="fab fa-twitter"></i>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Şifre görünürlüğünü değiştirme
+        document
+          .querySelectorAll(".password-toggle")
+          .forEach(function (toggle) {
+            toggle.addEventListener("click", function () {
+              const input = this.previousElementSibling;
+              const icon = this.querySelector("i");
+
+              if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+              } else {
+                input.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+              }
+            });
+          });
+
+        // Form gönderimini kontrol etme
+        document.querySelector("form").addEventListener("submit", function (e) {
+          const password = document.getElementById("password");
+          const repeatPassword = document.getElementById("repeatPassword");
+          const errorDiv = document.getElementById("passwordError");
+
+          if (password.value !== repeatPassword.value) {
+            e.preventDefault(); // Formun gönderilmesini engelle
+            errorDiv.textContent = "Şifreler eşleşmiyor! Lütfen kontrol edin.";
+            errorDiv.classList.remove("d-none"); // Hata mesajını göster
+            password.classList.add("is-invalid");
+            repeatPassword.classList.add("is-invalid");
+          } else {
+            errorDiv.classList.add("d-none"); // Hata yoksa mesajı gizle
+            password.classList.remove("is-invalid");
+            repeatPassword.classList.remove("is-invalid");
+          }
+        });
+      });
+    </script>
+    <%- include("../partials/footer") %>
+  </body>
+</html>
